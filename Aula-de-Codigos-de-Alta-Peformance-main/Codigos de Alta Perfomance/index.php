@@ -1,0 +1,120 @@
+<?php
+session_start();
+//verificacao de adm
+if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Reservas Incrivel</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!--Começo da Navbar-->
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-dark bg-primary mb-4">
+      <div class="container">
+        <span class="navbar-brand mb-0 h1">Reservas Inc</span>
+      </div>
+    </nav>
+    <!-- Fim Navbar-->
+
+    <!--Começo do Quadro de Reservas-->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-header bg-white">
+              <h4 class="mb-0">Nova Reserva</h4>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="nomeUsuario" class="form-label">Seu Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nomeUsuario"
+                  placeholder="Ex: Adhan Borges"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="salaSelect" class="form-label"
+                  >Sala Disponível</label
+                >
+                <select class="form-select" id="salaSelect">
+                  <option value="Sala 101">Sala 101 - Capacidade: 30</option>
+                  <option value="Laboratório A">
+                    Laboratório A - Capacidade: 20
+                  </option>
+                  <option value="Auditório">Auditório - Capacidade: 100</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="dataReserva" class="form-label">Data</label>
+                <input type="date" class="form-control" id="dataReserva" />
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="horaInicio" class="form-label">Hora Início</label>
+                  <input type="time" class="form-control" id="horaInicio" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="horaFim" class="form-label">Hora Fim</label>
+                  <input type="time" class="form-control" id="horaFim" />
+                </div>
+              </div>
+
+              <button
+                class="btn btn-success w-100"
+                onclick="adicionarReserva()"
+              >
+                Confirmar Reserva
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--Fim do Quadro de Reservas-->
+
+        <!--Começo Acomapnhar reservas-->
+        <div class="col-md-7">
+          <div class="card shadow-sm">
+            <div
+              class="card-header bg-white d-flex justify-content-between align-items-center"
+            >
+              <h4 class="mb-0">Acompanhamento de Reservas</h4>
+              <button
+                class="btn btn-outline-primary btn-sm"
+                onclick="listarReservas()"
+              >
+                Atualizar Lista
+              </button>
+            </div>
+            <div class="card-body">
+              <ul class="list-group" id="listaReservas">
+                <li class="list-group-item text-muted text-center">
+                  Nenhuma reserva encontrada no momento.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="app.js"></script>
+    <!--Fim Acomapnhar reservas-->
+  </body>
+</html>
